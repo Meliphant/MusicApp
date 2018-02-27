@@ -1,0 +1,80 @@
+<resources>
+    <string name="group_1">Muse</string>
+    <string name="group_2">Of Monsters and Men</string>
+    <string name="group_3">Piano Guys</string>
+    <string name="group_4">Aurora</string>
+    <string name="app_name">Music Library</string>
+    <string name="menu">About</string>
+    <string name="tracks">Tracks</string>
+
+    <string-array name="grid_all_albums">
+        <item>Muse</item>
+        <item>Of Monsters and Men</item>
+        <item>Piano Guys</item>
+        <item>Aurora</item>
+    </string-array>
+
+    <array name="list_all_arrays">
+        <item>@array/muse_album</item>
+        <item>@array/ofmm_album</item>
+        <item>@array/pguys_album</item>
+        <item>@array/aurora_album</item>
+    </array>
+
+    <integer-array name="list_all_images">
+        <item>@drawable/muse_list</item>
+        <item>@drawable/ofmm_list</item>
+        <item>@drawable/pguys_list</item>
+        <item>@drawable/aurora_list</item>
+    </integer-array>
+
+    <string-array name="muse_album">
+        <item>Resistance</item>
+        <item>Madness</item>
+        <item>Supremacy</item>
+        <item>Mercy</item>
+        <item>Psycho</item>
+        <item>Dead Inside</item>
+        <item>Guiding Light</item>
+        <item>MK Ultra</item>
+        <item>Undisclosed Desires</item>
+        <item>Uprising</item>
+    </string-array>
+
+    <string-array name="ofmm_album">
+        <item>We Sink</item>
+        <item>Dirty Paws</item>
+        <item>Slow And Steady</item>
+        <item>Little Talks</item>
+        <item>Six Weeks</item>
+        <item>Crystals</item>
+        <item>Numb Bears</item>
+        <item>Empire</item>
+        <item>Hunger</item>
+        <item>Black Water</item>
+    </string-array>
+
+    <string-array name="pguys_album">
+        <item>Moonlight</item>
+        <item>Beethoven\'s 5 Secrets</item>
+        <item>Let It Go</item>
+        <item>Titanium</item>
+        <item>Hello</item>
+        <item>The Chello Song</item>
+        <item>Game Day</item>
+        <item>All of Me</item>
+        <item>Story of My Life</item>
+        <item>The Jungle Book</item>
+    </string-array>
+
+    <string-array name="aurora_album">
+        <item>Warrior</item>
+        <item>Runaway</item>
+        <item>Running With The Wolves</item>
+        <item>Winter Bird</item>
+        <item>I Went Too Far</item>
+        <item>Conqueror</item>
+        <item>Lucky</item>
+        <item>Half the World Away</item>
+    </string-array>
+</resources>
