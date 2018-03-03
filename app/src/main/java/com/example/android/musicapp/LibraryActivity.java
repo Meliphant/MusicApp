@@ -14,19 +14,21 @@ import java.util.ArrayList;
 
 public class LibraryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    private static final String KEY_ARTIST = "artist";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
 
-        ArrayList<Group> groups = new ArrayList<Group>();
+        ArrayList<Group> groups = new ArrayList<>();
 
         groups.add(new Group(getString(R.string.group_1), R.drawable.muse));
         groups.add(new Group(getString(R.string.group_2), R.drawable.ofmm));
         groups.add(new Group(getString(R.string.group_3), R.drawable.pguys));
         groups.add(new Group(getString(R.string.group_4), R.drawable.aurora));
 
-        GridView gridView = (GridView) findViewById(R.id.gridview);
+        GridView gridView = findViewById(R.id.gridview);
         GroupArrayAdapter adapter = new GroupArrayAdapter(this, R.layout.group_item, groups);
         gridView.setAdapter(adapter);
 
@@ -36,11 +38,11 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-        TextView textViewSinger = (TextView) view.findViewById(R.id.template_artist_name);
+        TextView textViewSinger = view.findViewById(R.id.template_artist_name);
         String artist = textViewSinger.getText().toString();
 
         Intent intent = new Intent(this, GroupActivity.class);
-        intent.putExtra("artist", artist);
+        intent.putExtra(KEY_ARTIST, artist);
         startActivity(intent);
     }
 }

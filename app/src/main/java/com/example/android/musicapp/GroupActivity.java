@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,7 +21,9 @@ import java.util.ArrayList;
 
 public class GroupActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private String mArtist;
+    private TypedArray imgs;
+    private static final String KEY_SONG = "song";
+    private static final String KEY_ARTIST = "artist";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,86 +31,80 @@ public class GroupActivity extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_group);
 
         ArrayList<Song> songsArtist = new ArrayList<Song>();
+        String mArtist;
+        mArtist = getIntent().getExtras().getString(KEY_ARTIST);
 
-        mArtist = getIntent().getExtras().getString("artist");
-
-        // define AppBar Layout to inflate it an image
-        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
-
-        // get albums name array
+        // get albums name array and albums' images array
         String[] gridAllAlbums = getResources().getStringArray(R.array.grid_all_albums);
-        // get albums' images array
-        TypedArray imgs = getResources().obtainTypedArray(R.array.list_all_images);
+        imgs = getResources().obtainTypedArray(R.array.list_all_images);
+
         // get array with array's ids
         TypedArray arrayOfArrays = getResources().obtainTypedArray(R.array.list_all_arrays);
-        // define new matrix for songs list for each album
-        String[][] array = new String[arrayOfArrays.length()][];
-        // get array with albums songs for each matrix arrayOfArrays row
-        for (int i = 0; i < arrayOfArrays.length(); ++i) {
-            int id = arrayOfArrays.getResourceId(i, 0);
-            if (id > 0) {
-                array[i] = getResources().getStringArray(id);
-            }
-        }
+
         for (int j = 0; j < gridAllAlbums.length; j++){
             if (mArtist.equalsIgnoreCase(gridAllAlbums[j])){
-                // set Image for clicked playlist screen
-                if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    appBarLayout.setBackgroundResource(imgs.getResourceId(j, -1));
-                } else {
-                    appBarLayout.setBackgroundResource(imgs.getResourceId(j, -1));
-                }
-                // set Title for clicked playlist screen
-                collapsingToolbarLayout.setTitle(mArtist);
-                // inflate songs for clicked playlist screen
-                for (int i = 0; i < array[j].length; i++) {
-                    songsArtist.add(new Song(array[j][i], gridAllAlbums[j], Integer.toString(i + 1)));
+                updateLayout(mArtist, j);
+                if (gridAllAlbums.length == arrayOfArrays.length()) {
+                    int id = arrayOfArrays.getResourceId(j, 0);
+                    int arrayLength = getResources().getStringArray(id).length;
+                    String[] array = new String[arrayLength];
+                    if (id > 0) array = getResources().getStringArray(id);
+                    for (int i = 0; i < array.length; i++) {
+                        songsArtist.add(new Song(array[i], gridAllAlbums[j], Integer.toString(i + 1)));
+                    }
                 }
             }
         }
         arrayOfArrays.recycle();
 
-        // TODO: ! перенести наполение плейлиста в метод и вызывать его после клика, а не при загрузке главного экрана.
-        // TODO: добавить проверку на совпадение длин массивов gridAllAlbums и arrayOfArrays.
-
         // adds back arrow to the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
         // floating button
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Imagine that music now is playing...", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, R.string.snackbar_status_playing, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
 
         SongArrayAdapter arrayAdapter = new SongArrayAdapter(this, songsArtist);
-        ListView listView = (ListView) findViewById(R.id.songs_list);
+        ListView listView = findViewById(R.id.songs_list);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(this);
     }
 
+    private void updateLayout(String artist, int i){
+        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.toolbar_layout);
+        collapsingToolbarLayout.setTitle(artist);
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
+        TextView textView = findViewById(R.id.group_title);
+        textView.setText(artist);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        ImageView imageView = findViewById(R.id.image_group);
+        imageView.setImageResource(imgs.getResourceId(i, -1));
+    }
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-        TextView textViewSong = (TextView) view.findViewById(R.id.template_song_name);
+        TextView textViewSong = view.findViewById(R.id.template_song_name);
         String song = textViewSong.getText().toString();
 
-        TextView textViewSinger = (TextView) view.findViewById(R.id.template_artist_name);
+        TextView textViewSinger = view.findViewById(R.id.template_artist_name);
         String artist = textViewSinger.getText().toString();
 
         Intent intent = new Intent(this, SongActivity.class);
-        intent.putExtra("song", song);
-        intent.putExtra("artist", artist);
+        intent.putExtra(KEY_SONG, song);
+        intent.putExtra(KEY_ARTIST, artist);
         startActivity(intent);
     }
 

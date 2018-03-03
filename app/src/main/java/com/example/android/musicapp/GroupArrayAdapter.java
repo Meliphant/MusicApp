@@ -32,10 +32,10 @@ public class GroupArrayAdapter extends ArrayAdapter<Group> {
         }
         Group currentGroup = getItem(position);
 
-        TextView currentArtist = (TextView) currentListView.findViewById(R.id.template_artist_name);
+        TextView currentArtist = currentListView.findViewById(R.id.template_artist_name);
         currentArtist.setText(currentGroup.getGroupName());
 
-        ImageView currentImage = (ImageView) currentListView.findViewById(R.id.template_logo);
+        ImageView currentImage = currentListView.findViewById(R.id.template_logo);
         currentImage.setImageResource(currentGroup.getImageId());
         return currentListView;
     }

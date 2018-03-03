@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Top albums"
+        android:textStyle="bold"
         android:paddingLeft="16dp"
         android:paddingTop="20dp"
         android:paddingBottom="4dp"/>

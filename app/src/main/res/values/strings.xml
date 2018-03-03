@@ -4,8 +4,13 @@
     <string name="group_3">Piano Guys</string>
     <string name="group_4">Aurora</string>
     <string name="app_name">Music Library</string>
+    <string name="app_screen_song">Song screen</string>
     <string name="menu">About</string>
+    <string name="snackbar_status_playing">Imagine that music now is playing…</string>
+    <string name="snackbar_status_stopped">Now music stopped playing.</string>
     <string name="tracks">Tracks</string>
+    <string name="button_share_message">Enjoy and listen to music\n</string>
+    <string name="button_share_title">Share your music with friends</string>
 
     <string-array name="grid_all_albums">
         <item>Muse</item>
