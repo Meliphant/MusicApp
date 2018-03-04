@@ -57,7 +57,6 @@ public class GroupActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         arrayOfArrays.recycle();
 
-        // adds back arrow to the toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {

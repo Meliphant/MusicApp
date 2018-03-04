@@ -54,7 +54,7 @@ public class SongActivity extends AppCompatActivity {
                 } else {
                     Snackbar.make(view, R.string.snackbar_status_stopped, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-                    buttonPlayHandler.setImageResource(R.drawable.ic_pause_circle_filled);
+                    buttonPlayHandler.setImageResource(R.drawable.ic_play_circle_filled);
                     switcher = 0;
                 }
             }
